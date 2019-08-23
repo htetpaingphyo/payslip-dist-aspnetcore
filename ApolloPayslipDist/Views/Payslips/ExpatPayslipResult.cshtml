@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(Html.Kendo().Grid<ApolloPayslipDist.Models.ExpatPaySlip>()
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Select().Width(50);
+        columns.Bound(p => p.EmpId).Width(100);
+        columns.Bound(p => p.Email).Width(100);
+        columns.Bound(p => p.BaseSalaryMmk).Width(100);
+        columns.Bound(p => p.ActualWorkedDays).Title("Working Days").Width(100);
+        columns.Bound(p => p.OtherBenefitsMmk).Width(100);
+        columns.Bound(p => p.TaxPaymentMmk).Width(100);
+        columns.Bound(p => p.TotalDeductionMmk).Width(100);
+        columns.Bound(p => p.NetPayMmk).Width(100);
+    })
+    .Pageable()
+    .PersistSelection()
+    .Sortable()
+    .Events(ev => ev.Change("onChange"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(model => model.Id(p => p.Email))
+        .Read(read => read.Action("ReadExpatPayslipResult", "PaySlips"))
+        .PageSize(15)
+    )
+)
+
+<hr />
+<div class="clearfix float-right">
+    @Html.Kendo().Button().Name("btnSendMail").Content("Send Mail")
+</div>
+
+<script>
+
+    var emails = new Array();
+
+    function onChange(e) {
+        for (var i in this.selectedKeyNames()) {
+            emails[i] = this.selectedKeyNames()[i];
+        }
+    }
+
+    $("#btnSendMail").click(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "/SendMail/SendExpat",
+            type: 'POST',
+            data: { emails: emails },
+            dataType: 'json',
+            traditional: true,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
+</script>

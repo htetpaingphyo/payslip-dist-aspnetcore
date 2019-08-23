@@ -1,0 +1,36 @@
+﻿@model ApolloPayslipDist.Models.Account
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="AccountForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+            <div class="form-group">
+                <label asp-for="AccountEmail"></label>
+                <input asp-for="AccountEmail" class="k-textbox" />
+                <span asp-validation-for="AccountEmail" class="text-danger k-invalid-msg" data-for="AccountEmail"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountPassword"></label>
+                <input asp-for="AccountPassword" class="k-textbox" />
+                <span asp-validation-for="AccountPassword" class="text-danger k-invalid-msg" data-for="AccountPassword"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="k-button k-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="k-button">Back to List</a>
+</div>
+
