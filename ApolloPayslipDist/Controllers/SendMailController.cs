@@ -41,8 +41,8 @@ namespace ApolloPayslipDist.Controllers
                     var message = new MimeMessage();
                     message.From.Add(new MailboxAddress(sender.AccountEmail));
                     message.To.Add(new MailboxAddress(email));
-                    // message.Subject = $"Pay Slip for {DateTime.Now.ToString("MMM")}";
-                    message.Subject = $"Pay Slip for June 2019";
+                    message.Subject = $"Pay Slip for {DateTime.Now.ToString("MMM-yyyy")}";
+                    // message.Subject = $"Pay Slip for June 2019";
                     message.Body = new TextPart(TextFormat.Html)
                     {
                         Text = "<style>" +
@@ -132,8 +132,8 @@ namespace ApolloPayslipDist.Controllers
                     var message = new MimeMessage();
                     message.From.Add(new MailboxAddress(sender.AccountEmail));
                     message.To.Add(new MailboxAddress(email));
-                    // message.Subject = $"Pay Slip for {DateTime.Now.ToString("MMM")}";
-                    message.Subject = $"Pay Slip for June 2019";
+                    message.Subject = $"Pay Slip for {DateTime.Now.ToString("MMM-yyyy")}";
+                    // message.Subject = $"Pay Slip for June 2019";
                     message.Body = new TextPart(TextFormat.Html)
                     {
                         Text = "<style>" +
